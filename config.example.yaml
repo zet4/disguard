@@ -1,0 +1,17 @@
+listen_address: "127.0.0.1:3000"
+proxy_address: "http://127.0.0.1:8080"
+oauth:
+    redirect_url: "http://localhost:3000/oauth/callback"
+    client_id: "ur id here"
+    client_secret: "ur secret here"
+session:
+    hash_key: "Extremely secure 64 byte hash key that almost nobody will guess."
+    block_key: "Highly secure 32 byte block key."
+require_session: true
+header_name: XWhitelistedGuilds
+whitelisted_guilds:
+    - guild_id_here
+    - another_guild_id_here
+ignored_paths:
+    - /favicon.ico
+    - /robots.txt
