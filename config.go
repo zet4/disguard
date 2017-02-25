@@ -9,6 +9,7 @@ type (
 		HeaderName        string   `yaml:"header_name"`
 		WhitelistedGuilds []string `yaml:"whitelisted_guilds"`
 		RequireSession    bool     `yaml:"require_session"`
+		IgnoredPaths      []string `yaml:"ignored_paths"`
 
 		OAuth   OAuthSection   `yaml:"oauth"`
 		Session SessionSection `yaml:"session"`

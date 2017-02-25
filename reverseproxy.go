@@ -27,13 +27,20 @@ type WrappedReverseProxy struct {
 	sess *Session
 }
 
+// IsIgnoredPath checks whatever the path is ignored in the config
+func (o *Session) IsIgnoredPath(path string) bool {
+	for _, c := range o.config.IgnoredPaths {
+		if c == path {
+			return true
+		}
+	}
+	return false
+}
+
 func (w *WrappedReverseProxy) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 	if w.sess.config.RequireSession {
 		u, err := w.sess.GetSession(req)
-		if err != nil || len(u.Whitelisted) == 0 {
-			if req.URL.Path == "/favicon.ico" {
-				return
-			}
+		if (err != nil || len(u.Whitelisted) == 0) && !w.sess.IsIgnoredPath(req.URL.Path) {
 			http.Redirect(rw, req, "/oauth/login", http.StatusFound)
 			return
 		}
