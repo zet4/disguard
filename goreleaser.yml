@@ -1,0 +1,17 @@
+build:
+  binary_name: disguard
+  goos:
+    - windows
+    - darwin
+    - linux
+  goarch:
+    - amd64
+archive:
+  format: zip
+  replacements:
+    amd64: 64-bit
+    darwin: macOS
+    linux: Linux
+  files:
+    - README.md
+    - LICENSE.md
