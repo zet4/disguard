@@ -1,4 +1,4 @@
-package main // import "go.zeta.pm/disguard"
+package disguard // import "go.zeta.pm/disguard"
 
 // Guild mini-container, we only care about ID.
 type Guild struct {

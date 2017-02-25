@@ -1,4 +1,4 @@
-package main // import "go.zeta.pm/disguard"
+package disguard // import "go.zeta.pm/disguard"
 import (
 	"log"
 	"net/http"

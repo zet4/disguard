@@ -1,4 +1,4 @@
-package main // import "go.zeta.pm/disguard"
+package main // import "go.zeta.pm/disguard/cmd/disguard"
 
 import (
 	"io/ioutil"
@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	"github.com/pressly/chi"
+	"go.zeta.pm/disguard"
 	"gopkg.in/yaml.v2"
 )
 
@@ -14,13 +15,13 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	var conf Config
+	var conf disguard.Config
 	err = yaml.Unmarshal(in, &conf)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	sess := NewSessionRouter(&conf)
+	sess := disguard.NewSessionRouter(&conf)
 
 	root := chi.NewRouter()
 	root.Route("/oauth", sess.Route)

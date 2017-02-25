@@ -1,4 +1,5 @@
 build:
+  main: cmd/disguard/main.go
   binary_name: disguard
   goos:
     - windows
