@@ -28,7 +28,7 @@ type WrappedReverseProxy struct {
 }
 
 // IsIgnoredPath checks whatever the path is ignored in the config
-func (o *Session) IsIgnoredPath(path string) bool {
+func (o *Session) isIgnoredPath(path string) bool {
 	for _, c := range o.config.IgnoredPaths {
 		if c == path {
 			return true
@@ -39,8 +39,8 @@ func (o *Session) IsIgnoredPath(path string) bool {
 
 func (w *WrappedReverseProxy) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 	if w.sess.config.RequireSession {
-		u, err := w.sess.GetSession(req)
-		if (err != nil || len(u.Whitelisted) == 0) && !w.sess.IsIgnoredPath(req.URL.Path) {
+		u, err := w.sess.getSession(req)
+		if (err != nil || len(u.Whitelisted) == 0) && !w.sess.isIgnoredPath(req.URL.Path) {
 			http.Redirect(rw, req, "/oauth/login", http.StatusFound)
 			return
 		}
@@ -68,7 +68,7 @@ func (o *Session) ReverseHandler() *WrappedReverseProxy {
 			// explicitly disable User-Agent so it's not set to default value
 			req.Header.Set("User-Agent", "")
 		}
-		if u, err := o.GetSession(req); err == nil {
+		if u, err := o.getSession(req); err == nil {
 			req.Header.Set(o.config.HeaderName, strings.Join(u.Whitelisted, ","))
 		} else {
 			req.Header.Set(o.config.HeaderName, "")

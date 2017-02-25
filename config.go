@@ -20,6 +20,8 @@ type (
 		RedirectURL  string `yaml:"redirect_url"`
 		ClientID     string `yaml:"client_id"`
 		ClientSecret string `yaml:"client_secret"`
+
+		redirectURL, authorizationURL *string
 	}
 
 	// SessionSection ...

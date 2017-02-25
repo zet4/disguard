@@ -15,7 +15,6 @@ import (
 // Session contains everything OAuth
 type Session struct {
 	config        *Config
-	oauthConfig   *OAuthConfig
 	httpClient    *http.Client
 	cookieHandler *securecookie.SecureCookie
 	box           *rice.Box
@@ -23,19 +22,19 @@ type Session struct {
 
 // HandleLogin ...
 func (o *Session) HandleLogin(w http.ResponseWriter, r *http.Request) {
-	http.Redirect(w, r, o.oauthConfig.GetAuthorizationURL(), http.StatusFound)
+	http.Redirect(w, r, o.config.OAuth.GetAuthorizationURL(), http.StatusFound)
 }
 
 // HandleLogout ...
 func (o *Session) HandleLogout(w http.ResponseWriter, r *http.Request) {
-	o.ClearSession(w)
+	o.clearSession(w)
 
 	http.Redirect(w, r, "/", http.StatusFound)
 }
 
 // ObtainToken ...
 func (o *Session) ObtainToken(code string) (*TokenResponse, error) {
-	req, err := http.NewRequest("POST", o.oauthConfig.GetTokenURL(code), nil)
+	req, err := http.NewRequest("POST", o.config.OAuth.GetTokenURL(code), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -107,9 +106,8 @@ func (o *Session) GetGuilds(tokenResponse *TokenResponse) ([]Guild, error) {
 	return guildsResponse, nil
 }
 
-// FilterWhitelisted itereates over all guilds and returns list of matching guilds
-func (o *Session) FilterWhitelisted(guilds []Guild) []string {
-	results := make([]string, 0)
+func (o *Session) filterWhitelisted(guilds []Guild) []string {
+	var results []string
 mainLabel:
 	for _, guild := range guilds {
 		for _, whitelistedID := range o.config.WhitelistedGuilds {
@@ -125,8 +123,7 @@ mainLabel:
 	return results
 }
 
-// DoCallback ...
-func (o *Session) DoCallback(code string) (*User, error) {
+func (o *Session) doCallback(code string) (*User, error) {
 	tokenResponse, err := o.ObtainToken(code)
 	if err != nil {
 		return nil, err
@@ -139,7 +136,7 @@ func (o *Session) DoCallback(code string) (*User, error) {
 	if err != nil {
 		return nil, err
 	}
-	whitelisted := o.FilterWhitelisted(guildsResponse)
+	whitelisted := o.filterWhitelisted(guildsResponse)
 	if len(whitelisted) == 0 {
 		return nil, http.ErrAbortHandler
 	}
@@ -157,14 +154,14 @@ func (o *Session) HandleCallback(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	userResponse, err := o.DoCallback(code[0])
+	userResponse, err := o.doCallback(code[0])
 	if err != nil {
 		w.WriteHeader(403)
 		w.Write(o.box.MustBytes("error403.html"))
 		return
 	}
 
-	err = o.SetSession(w, *userResponse)
+	err = o.setSession(w, *userResponse)
 	if err != nil {
 		http.Redirect(w, r, "/", http.StatusFound)
 		return
@@ -194,7 +191,6 @@ func (o *Session) Route(r chi.Router) {
 func NewSessionRouter(c *Config) *Session {
 	sess := &Session{
 		config:        c,
-		oauthConfig:   NewOAuth(c.OAuth),
 		httpClient:    &http.Client{},
 		cookieHandler: securecookie.New([]byte(c.Session.HashKey), []byte(c.Session.BlockKey)),
 		box:           rice.MustFindBox("static"),

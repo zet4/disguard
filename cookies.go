@@ -7,7 +7,7 @@ import (
 )
 
 // GetSession ...
-func (o *Session) GetSession(r *http.Request) (*User, error) {
+func (o *Session) getSession(r *http.Request) (*User, error) {
 	cookie, err := r.Cookie("session")
 	if err != nil {
 		return nil, err
@@ -23,7 +23,7 @@ func (o *Session) GetSession(r *http.Request) (*User, error) {
 }
 
 // SetSession ...
-func (o *Session) SetSession(w http.ResponseWriter, user User) error {
+func (o *Session) setSession(w http.ResponseWriter, user User) error {
 	encoded, err := o.cookieHandler.Encode("session", user)
 	if err != nil {
 		return err
@@ -43,7 +43,7 @@ func (o *Session) SetSession(w http.ResponseWriter, user User) error {
 }
 
 // ClearSession ...
-func (o *Session) ClearSession(w http.ResponseWriter) error {
+func (o *Session) clearSession(w http.ResponseWriter) error {
 	cookie := &http.Cookie{
 		Name:     "session",
 		Value:    "",
