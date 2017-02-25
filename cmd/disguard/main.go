@@ -21,10 +21,14 @@ func main() {
 		log.Fatal(err)
 	}
 
+	if conf.AuthRoot == "" {
+		conf.AuthRoot = "/oauth"
+	}
+
 	sess := disguard.NewSessionRouter(&conf)
 
 	root := chi.NewRouter()
-	root.Route("/oauth", sess.Route)
+	root.Route(conf.AuthRoot, sess.Route)
 	root.Mount("/", sess.ReverseHandler())
 
 	http.ListenAndServe(conf.ListenAddress, root)

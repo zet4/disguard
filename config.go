@@ -10,6 +10,7 @@ type (
 		WhitelistedGuilds []string `yaml:"whitelisted_guilds"`
 		RequireSession    bool     `yaml:"require_session"`
 		IgnoredPaths      []string `yaml:"ignored_paths"`
+		AuthRoot          string   `yaml:"auth_root"`
 
 		OAuth   OAuthSection   `yaml:"oauth"`
 		Session SessionSection `yaml:"session"`
