@@ -1,0 +1,49 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"checksumSHA1": "3eH5XenKCK28s5fpbAeQoPGT3D0=",
+			"path": "github.com/GeertJohan/go.rice",
+			"revision": "9fdfd46f9806a9228aae341d65ab75c5235c383c",
+			"revisionTime": "2016-08-11T09:34:08Z"
+		},
+		{
+			"checksumSHA1": "xECV8VmnSwtMPugLqB1OAXwOs48=",
+			"path": "github.com/GeertJohan/go.rice/embedded",
+			"revision": "9fdfd46f9806a9228aae341d65ab75c5235c383c",
+			"revisionTime": "2016-08-11T09:34:08Z"
+		},
+		{
+			"checksumSHA1": "8i+beEgcVf0q/I7lTqo2ERZM/OU=",
+			"path": "github.com/daaku/go.zipexe",
+			"revision": "a5fe2436ffcb3236e175e5149162b41cd28bd27d",
+			"revisionTime": "2015-03-29T02:31:25Z"
+		},
+		{
+			"checksumSHA1": "veX5bpYOBjZZWMyWxXxys8EH9d8=",
+			"path": "github.com/gorilla/securecookie",
+			"revision": "fa5329f913702981df43dcb2a380bac429c810b5",
+			"revisionTime": "2016-10-03T05:16:01Z"
+		},
+		{
+			"checksumSHA1": "g+afVQQVopBLiLB5pFZp/8s6aBs=",
+			"path": "github.com/kardianos/osext",
+			"revision": "c2c54e542fb797ad986b31721e1baedf214ca413",
+			"revisionTime": "2016-08-11T00:15:26Z"
+		},
+		{
+			"checksumSHA1": "WNCrN6pvyfG8fAoIAulHSaUPYos=",
+			"path": "github.com/pressly/chi",
+			"revision": "73deb7ecc23095c0de39ba4de4f2a30e2ba829c6",
+			"revisionTime": "2017-01-08T00:00:35Z"
+		},
+		{
+			"checksumSHA1": "/Nc6+mciSLao6jlfzWpI+y3XyJA=",
+			"path": "gopkg.in/yaml.v2",
+			"revision": "a3f3340b5840cee44f372bddb5880fcbc419b46a",
+			"revisionTime": "2017-02-08T14:18:51Z"
+		}
+	],
+	"rootPath": "go.zeta.pm/disguard"
+}
