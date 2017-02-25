@@ -16,7 +16,7 @@ after_success:
         CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o disguard .;
         docker build -t zeta0/disguard .; 
         docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-        docker push zeta0/diguard;
+        docker push zeta0/disguard;
         fi
     - if [ -n "$TRAVIS_TAG" ]; then
         CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o disguard .;
