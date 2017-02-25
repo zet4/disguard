@@ -15,8 +15,8 @@ func init() {
 	}
 	file3 := &embedded.EmbeddedFile{
 		Filename:    `error403.html`,
-		FileModTime: time.Unix(1487987601, 0),
-		Content:     string("<!DOCTYPE html>\n<html>\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Nothing to see here.</title>\n    <link rel=\"stylesheet\" href=\"/oauth/static/style.css\">\n  </head>\n  <body>\n    <div class=\"row wrapper center-xs middle-xs\">\n      <div class=\"col-xs\">\n        <div class=\"box\">      \n          <div class=\"row center-xs middle-xs\">\n            <div class=\"col-xs-6\">\n              <div class=\"box\">\n                <div>\n                  <a href=\"/oauth/login\"><img class=\"eye\" src=\"/oauth/static/403-thicker.png\"/><img class=\"eye\" src=\"/oauth/static/nothing-for-you.png\"/></a>\n                </div>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>  \n  </body>\n</html>\n"),
+		FileModTime: time.Unix(1488034399, 0),
+		Content:     string("<!DOCTYPE html>\n<html>\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Nothing to see here.</title>\n    <link rel=\"stylesheet\" href=\"static/style.css\">\n  </head>\n  <body>\n    <div class=\"row wrapper center-xs middle-xs\">\n      <div class=\"col-xs\">\n        <div class=\"box\">      \n          <div class=\"row center-xs middle-xs\">\n            <div class=\"col-xs-6\">\n              <div class=\"box\">\n                <div>\n                  <a href=\"/oauth/login\"><img class=\"eye\" src=\"static/403-thicker.png\"/><img class=\"eye\" src=\"static/nothing-for-you.png\"/></a>\n                </div>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>  \n  </body>\n</html>\n"),
 	}
 	file4 := &embedded.EmbeddedFile{
 		Filename:    `nothing-for-you.png`,
