@@ -13,13 +13,13 @@ script:
 after_success:
     - bash <(curl -s https://codecov.io/bash)
     - if [ "$TRAVIS_BRANCH" == "master" ]; then
-        CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o disguard .;
+        CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o disguard cmd/disguard/main.go;
         docker build -t zeta0/disguard .; 
         docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
         docker push zeta0/disguard;
         fi
     - if [ -n "$TRAVIS_TAG" ]; then
-        CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o disguard .;
+        CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o disguard cmd/disguard/main.go;
         docker build -t zeta0/disguard:$TRAVIS_TAG .;
         docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
         docker push zeta0/disguard:$TRAVIS_TAG;
