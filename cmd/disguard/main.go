@@ -5,13 +5,24 @@ import (
 	"log"
 	"net/http"
 
+	"flag"
+
 	"github.com/pressly/chi"
 	"go.zeta.pm/disguard"
 	"gopkg.in/yaml.v2"
 )
 
+var (
+	configPath string
+)
+
+func init() {
+	flag.StringVar(&configPath, "c", "config.yaml", "The path to the configuration file.")
+	flag.Parse()
+}
+
 func main() {
-	in, err := ioutil.ReadFile("config.yaml")
+	in, err := ioutil.ReadFile(configPath)
 	if err != nil {
 		log.Fatal(err)
 	}
