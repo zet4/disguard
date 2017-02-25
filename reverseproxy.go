@@ -19,6 +19,8 @@ func singleJoiningSlash(a, b string) string {
 	return a + b
 }
 
+// WrappedReverseProxy wraps httputil reverse proxy handler to provide RequireSession
+// Support so it would redirect to login.
 type WrappedReverseProxy struct {
 	*httputil.ReverseProxy
 

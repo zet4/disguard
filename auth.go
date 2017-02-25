@@ -12,6 +12,7 @@ import (
 	"github.com/pressly/chi"
 )
 
+// Session contains everything OAuth
 type Session struct {
 	config        *Config
 	oauthConfig   *OAuthConfig
